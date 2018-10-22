@@ -1,15 +1,20 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
 import com.agfa.demo.domain.Food;
-import java.util.HashSet;
-import java.util.Set;
+import com.agfa.demo.persistence.FoodRepository;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 public abstract class Animal extends Food implements AnimalInterface {
     protected String name;
-    protected Set<Food> digests;
+
+    protected List<Food> foods;
+
+    @Resource
+    protected FoodRepository foodRepository;
 
     Animal(){
-        digests = new HashSet<>();
         type = type();
     }
 
@@ -22,11 +27,6 @@ public abstract class Animal extends Food implements AnimalInterface {
     public AnimalInterface nameAnimal(String name) {
         this.name = name;
         return this;
-    }
-
-    @Override
-    public String toString() {
-        return name + " is a " + type();
     }
 
     @Override
@@ -43,5 +43,20 @@ public abstract class Animal extends Food implements AnimalInterface {
     @Override
     public int getIntake() {
         return 2000;
+    }
+
+    @Override
+    public boolean isAnimal(){
+        return true;
+    }
+
+    @Override
+    public void eats(List<Food> foods){
+        this.foods = foods;
+    }
+
+    @Override
+    public List<Food> eats(){
+        return foods;
     }
 }

@@ -3,28 +3,37 @@ package com.agfa.demo.persistence;
 import com.agfa.demo.domain.AnimalKingdom.AnimalFactory;
 import com.agfa.demo.domain.AnimalKingdom.AnimalInterface;
 import com.agfa.demo.domain.AnimalKingdom.Human;
+import com.agfa.demo.domain.Food;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.annotation.Resource;
+import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class AnimalEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "animal_id")
     private Long id;
 
     private String name;
     private String type;
-    private String eats;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FoodEntity> eats;
 
     protected AnimalEntity(){}
 
     public AnimalEntity(AnimalInterface animalInterface){
         this.name = animalInterface.name();
         this.type = animalInterface.type();
-        this.eats = animalInterface.eats();
+    }
+
+    public AnimalEntity buildFoodKingdom(List<FoodEntity> foods){
+        eats = foods;
+        return this;
     }
 
     public static AnimalInterface adapt(AnimalEntity animalEntity) {

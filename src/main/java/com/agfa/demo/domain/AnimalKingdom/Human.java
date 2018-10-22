@@ -6,9 +6,4 @@ import org.springframework.stereotype.Component;
 public class Human extends Primate {
 
     private Long id;
-
-    @Override
-    public String eats(){
-        return "Everything";
-    }
 }

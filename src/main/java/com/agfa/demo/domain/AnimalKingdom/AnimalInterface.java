@@ -1,5 +1,9 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
+import com.agfa.demo.domain.Food;
+
+import java.util.List;
+
 public interface AnimalInterface {
 
     AnimalInterface nameAnimal(String name);
@@ -7,5 +11,6 @@ public interface AnimalInterface {
     boolean is(String type);
     String name();
 
-    String eats();
+    List<Food> eats();
+    void eats(List<Food> foods);
 }

@@ -1,9 +1,19 @@
 package com.agfa.demo.domain.PlantKingdom;
 
-public interface Plant {
+public abstract class Plant implements Vegetable {
 
-    public void grow();
-    public Plant weedSeed();
+    @Override
+    public String getType(){
+        return this.getClass().getSimpleName();
+    }
 
-    public  void persistFoodFromPlant();
+    @Override
+    public boolean isPlant(){
+        return true;
+    }
+
+    @Override
+    public String parent(){
+        return getType();
+    }
 }

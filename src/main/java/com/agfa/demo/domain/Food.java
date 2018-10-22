@@ -22,4 +22,8 @@ public abstract class Food {
     public String getType(){
         return type;
     }
+
+    public boolean isAnimal(){
+        return false;
+    }
 }

@@ -6,8 +6,4 @@ import org.springframework.stereotype.Component;
 public class Chimp extends Primate {
     private Long id;
 
-    @Override
-    public String toString(){
-        return super.toString() + " and has a tail";
-    }
 }
