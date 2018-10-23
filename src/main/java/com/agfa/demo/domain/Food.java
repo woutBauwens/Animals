@@ -1,16 +1,8 @@
 package com.agfa.demo.domain;
 
-public abstract class Food {
-
+public abstract class Food implements Kingdom{
     protected int calories;
-    protected boolean goneBad;
-    protected int age;
     protected String type;
-
-    public Food(){
-        goneBad = false;
-        age = 0;
-    }
 
     public abstract int getIntake();
 
@@ -19,7 +11,7 @@ public abstract class Food {
         return type;
     }
 
-    public String getType(){
+    public String type(){
         return type;
     }
 

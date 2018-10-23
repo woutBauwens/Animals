@@ -35,4 +35,12 @@ public class Banana extends Food implements Vegetable {
     public boolean isPlant() {
         return false;
     }
+
+    @Override
+    public boolean is(String type) {
+        return type.equals(type());
+    }
+
+    @Override
+    public String printLine() {return "The " + type() + " is hanging on the " + parent();}
 }

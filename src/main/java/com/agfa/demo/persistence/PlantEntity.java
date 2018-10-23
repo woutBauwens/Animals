@@ -19,7 +19,11 @@ public class PlantEntity {
     protected PlantEntity(){}
 
     public PlantEntity(Vegetable vegetable){
-        type = vegetable.getType();
+        type = vegetable.type();
         parent = vegetable.parent();
+    }
+
+    public String getType() {
+        return type;
     }
 }

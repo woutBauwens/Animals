@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -20,7 +21,7 @@ public class PlantService {
         insert(new PlantEntity(vegetable));
     }
 
-    public void insert(PlantEntity plantEntity){
+    private void insert(PlantEntity plantEntity){
         entityManager.persist(plantEntity);
     }
 
@@ -31,5 +32,9 @@ public class PlantService {
         } else {
             System.out.println("The Plant already exists");
         }
+    }
+
+    public List<PlantEntity> getAll() {
+        return entityManager.createQuery("SELECT plant FROM PlantEntity plant").getResultList();
     }
 }

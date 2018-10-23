@@ -1,6 +1,8 @@
 package com.agfa.demo;
 
+import com.agfa.demo.UI.PrintAnimals;
 import com.agfa.demo.domain.AnimalKingdom.*;
+import com.agfa.demo.domain.Kingdom;
 import com.agfa.demo.domain.PlantKingdom.BananaTree;
 import com.agfa.demo.persistence.AnimalRepository;
 import com.agfa.demo.persistence.FoodRepository;
@@ -8,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -29,19 +32,11 @@ public class DemoApplication {
     @PostConstruct
     public void init() {
         foodRepository.initFoods();
-
-        animals.buildFoodCYcle(foodRepository.getAllTypesOfFood());
-        animals.makeAnimal("Wout", "Human")
-                .makeAnimal("Arne", "Chimp")
-                .makeAnimal("Tim", "Human")
-                .makeAnimal("Tom", new Human())
-                .makeAnimal("Sofie", new Chimp())
-                .makeAnimal("Freddy", new Lion())
-                .makeAnimal("George", new Gorilla());
-
+        animals.populate();
         bananaTree.grow();
 
-        AnimalInterface animal = animals.receiveAnimal(4L);
-        System.out.println("The saved animal is: " + animal.name());
+        List<Kingdom> kingdoms = animals.getAllAnimals();
+        kingdoms.addAll(bananaTree.getTree());
+        PrintAnimals.show(kingdoms);
     }
 }

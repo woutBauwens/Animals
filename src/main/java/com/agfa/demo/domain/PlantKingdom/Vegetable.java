@@ -1,14 +1,15 @@
 package com.agfa.demo.domain.PlantKingdom;
 
-public interface Vegetable {
+import com.agfa.demo.domain.Kingdom;
+
+public interface Vegetable extends Kingdom {
 
     void grow();
 
     Vegetable weedSeed();
 
-    String getType();
-
     String parent();
 
     boolean isPlant();
+
 }

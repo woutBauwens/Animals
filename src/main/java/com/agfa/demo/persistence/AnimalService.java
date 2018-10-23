@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,8 +18,6 @@ public class AnimalService {
 
     public void insert(AnimalInterface animalInterface){
         AnimalEntity animalEntity = new AnimalEntity(animalInterface);
-        List<FoodEntity> foods = getFood(); //animalInterface.eats().stream().map(a -> entityManager.find(FoodEntity.class, a.getType())).collect(Collectors.toList());
-        animalEntity.buildFoodKingdom(foods);
         insert(animalEntity);
     }
 
@@ -32,11 +29,8 @@ public class AnimalService {
         return AnimalEntity.adapt(entityManager.find(AnimalEntity.class, animalId));
     }
 
-    public List<AnimalInterface> getAll(){
-        return  entityManager.createQuery("SELECT *").getResultList();
+    public List<AnimalEntity> getAllAnimals(){
+        return entityManager.
+                createQuery("SELECT animal FROM AnimalEntity animal JOIN animal.eats eats").getResultList();
     }
-
-    public List<FoodEntity> getFood(){return entityManager.createQuery("FROM FoodEntity").getResultList();}
-
-
 }

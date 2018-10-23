@@ -1,16 +1,17 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
 import com.agfa.demo.domain.Food;
+import com.agfa.demo.domain.Kingdom;
 
 import java.util.List;
+import java.util.Map;
 
-public interface AnimalInterface {
+public interface AnimalInterface extends Kingdom {
 
     AnimalInterface nameAnimal(String name);
-    String type();
     boolean is(String type);
     String name();
 
     List<Food> eats();
-    void eats(List<Food> foods);
+    Map<String, String> unique();
 }

@@ -1,11 +1,9 @@
 package com.agfa.demo.persistence;
 
-import com.agfa.demo.domain.AnimalKingdom.AnimalFactory;
+import com.agfa.demo.domain.KingdomFactory;
 import com.agfa.demo.domain.AnimalKingdom.AnimalInterface;
 import com.agfa.demo.domain.AnimalKingdom.Human;
-import com.agfa.demo.domain.Food;
 
-import javax.annotation.Resource;
 import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,19 +24,15 @@ public class AnimalEntity {
 
     protected AnimalEntity(){}
 
-    public AnimalEntity(AnimalInterface animalInterface){
+    AnimalEntity(AnimalInterface animalInterface){
         this.name = animalInterface.name();
         this.type = animalInterface.type();
+        this.eats = animalInterface.eats().stream().map(FoodEntity::new).collect(Collectors.toList());
     }
 
-    public AnimalEntity buildFoodKingdom(List<FoodEntity> foods){
-        eats = foods;
-        return this;
-    }
-
-    public static AnimalInterface adapt(AnimalEntity animalEntity) {
+    static AnimalInterface adapt(AnimalEntity animalEntity) {
         try {
-            return AnimalFactory.createAnimal(animalEntity.type).nameAnimal(animalEntity.name);
+            return KingdomFactory.createAnimal(animalEntity.type).nameAnimal(animalEntity.name);
         } catch (NullPointerException exception) {
             System.out.println("Animal not found. Creating new animal");
             return new Human();

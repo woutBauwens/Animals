@@ -34,6 +34,6 @@ public class FoodRepository {
     }
 
     public FoodEntity getFoodEntity(Food food){
-        return foodService.getFood(food.getType());
+        return foodService.getFood(food.type());
     }
 }

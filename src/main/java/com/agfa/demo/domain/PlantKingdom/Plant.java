@@ -3,7 +3,7 @@ package com.agfa.demo.domain.PlantKingdom;
 public abstract class Plant implements Vegetable {
 
     @Override
-    public String getType(){
+    public String type(){
         return this.getClass().getSimpleName();
     }
 
@@ -14,6 +14,9 @@ public abstract class Plant implements Vegetable {
 
     @Override
     public String parent(){
-        return getType();
+        return type();
     }
+
+    @Override
+    public String printLine() {return type();}
 }
