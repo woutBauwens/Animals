@@ -1,9 +1,9 @@
 package com.agfa.demo;
 
 import com.agfa.demo.UI.PrintAnimals;
-import com.agfa.demo.domain.AnimalKingdom.*;
 import com.agfa.demo.domain.Kingdom;
 import com.agfa.demo.domain.PlantKingdom.BananaTree;
+import com.agfa.demo.domain.PlantKingdom.Plant;
 import com.agfa.demo.persistence.AnimalRepository;
 import com.agfa.demo.persistence.FoodRepository;
 import org.springframework.boot.SpringApplication;
@@ -16,10 +16,10 @@ import java.util.List;
 public class DemoApplication {
 
     private AnimalRepository animals;
-    private BananaTree bananaTree;
+    private Plant bananaTree;
     private FoodRepository foodRepository;
 
-    public DemoApplication(AnimalRepository animals, BananaTree bananaTree, FoodRepository foodRepository) {
+    public DemoApplication(AnimalRepository animals,BananaTree bananaTree, FoodRepository foodRepository) {
         this.animals = animals;
         this.bananaTree = bananaTree;
         this.foodRepository = foodRepository;
@@ -33,7 +33,12 @@ public class DemoApplication {
     public void init() {
         foodRepository.initFoods();
         animals.populate();
-        bananaTree.grow();
+
+        bananaTree.giveName("Boompie").grow(1);
+        bananaTree.grow(1);
+        bananaTree.grow(1);
+
+        bananaTree.weedSeed("The big old tree").grow(10);
 
         List<Kingdom> kingdoms = animals.getAllAnimals();
         kingdoms.addAll(bananaTree.getTree());

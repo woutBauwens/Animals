@@ -3,6 +3,9 @@ package com.agfa.demo.domain;
 public interface Kingdom {
 
     String type();
+    boolean isAnimal();
     boolean is(String type);
-    String printLine();
+    Kingdom giveName(String name);
+
+    String printString();
 }

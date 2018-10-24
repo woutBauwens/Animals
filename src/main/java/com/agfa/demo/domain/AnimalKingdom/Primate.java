@@ -1,9 +1,10 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
-import com.agfa.demo.domain.Food;
+import com.agfa.demo.domain.Eatable;
+
 import java.util.List;
 
-public abstract class Primate extends Animal {
+public abstract class Primate extends AnimalImpl {
 
     @Override
     public int getIntake() {
@@ -11,7 +12,7 @@ public abstract class Primate extends Animal {
     }
 
     @Override
-    public List<Food> eats() {
+    public List<Eatable> eats() {
         return create(appetiteFor("Banana"));
     }
 }

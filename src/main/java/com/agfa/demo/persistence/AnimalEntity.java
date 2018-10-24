@@ -1,41 +1,32 @@
 package com.agfa.demo.persistence;
 
+import com.agfa.demo.domain.AnimalKingdom.Animal;
+import com.agfa.demo.domain.Kingdom;
 import com.agfa.demo.domain.KingdomFactory;
-import com.agfa.demo.domain.AnimalKingdom.AnimalInterface;
-import com.agfa.demo.domain.AnimalKingdom.Human;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-public class AnimalEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "animal_id")
-    private Long id;
-
-    private String name;
-    private String type;
+@DiscriminatorValue(value = "Animal")
+public class AnimalEntity extends LivingEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @Basic(fetch = FetchType.LAZY)
     private List<FoodEntity> eats;
 
-    protected AnimalEntity(){}
-
-    AnimalEntity(AnimalInterface animalInterface){
-        this.name = animalInterface.name();
-        this.type = animalInterface.type();
-        this.eats = animalInterface.eats().stream().map(FoodEntity::new).collect(Collectors.toList());
+    protected AnimalEntity() {
     }
 
-    static AnimalInterface adapt(AnimalEntity animalEntity) {
-        try {
-            return KingdomFactory.createAnimal(animalEntity.type).nameAnimal(animalEntity.name);
-        } catch (NullPointerException exception) {
-            System.out.println("Animal not found. Creating new animal");
-            return new Human();
-        }
+    AnimalEntity(Animal animal) {
+        this.name = animal.name();
+        this.type = animal.type();
+        this.eats = animal.eats().stream().map(FoodEntity::new).collect(Collectors.toList());
+        parent = type;
+    }
+
+    Kingdom mapToAnimal() {
+        return KingdomFactory.createAnimal(type).giveName(name);
     }
 }

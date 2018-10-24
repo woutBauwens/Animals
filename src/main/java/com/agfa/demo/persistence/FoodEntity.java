@@ -1,6 +1,6 @@
 package com.agfa.demo.persistence;
 
-import com.agfa.demo.domain.Food;
+import com.agfa.demo.domain.Eatable;
 
 import javax.persistence.*;
 
@@ -18,22 +18,8 @@ public class FoodEntity {
 
     protected FoodEntity(){}
 
-    public FoodEntity(Food food){
-        this.calories = food.getIntake();
-        this.type = food.toString();
-    }
-
-    public FoodEntity getEntity(Food food){
-        this.calories = food.getIntake();
-        this.type = food.type();
-        return this;
-    }
-
-    public boolean isOfType(String type){
-        return this.type.equals(type);
-    }
-
-    public Long getId(){
-        return id;
+    FoodEntity(Eatable eatable){
+        this.calories = eatable.getIntake();
+        this.type = eatable.type();
     }
 }

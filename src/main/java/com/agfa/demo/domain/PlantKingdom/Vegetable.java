@@ -4,12 +4,11 @@ import com.agfa.demo.domain.Kingdom;
 
 public interface Vegetable extends Kingdom {
 
-    void grow();
+    void grow(int amount);
 
-    Vegetable weedSeed();
+    Vegetable weedSeed(String name);
 
     String parent();
 
-    boolean isPlant();
-
+    String name();
 }

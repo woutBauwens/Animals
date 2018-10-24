@@ -1,6 +1,5 @@
 package com.agfa.demo.persistence;
 
-import com.agfa.demo.domain.PlantKingdom.BananaTree;
 import com.agfa.demo.domain.PlantKingdom.Plant;
 import com.agfa.demo.domain.PlantKingdom.Vegetable;
 import org.springframework.stereotype.Repository;
@@ -35,6 +34,6 @@ public class PlantService {
     }
 
     public List<PlantEntity> getAll() {
-        return entityManager.createQuery("SELECT plant FROM PlantEntity plant").getResultList();
+        return entityManager.createNamedQuery("getAllPlantEntities", PlantEntity.class).getResultList();
     }
 }

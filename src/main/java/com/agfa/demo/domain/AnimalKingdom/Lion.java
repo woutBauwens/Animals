@@ -1,16 +1,14 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
 
-import com.agfa.demo.domain.Food;
+import com.agfa.demo.domain.Eatable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class Lion extends Animal {
+public class Lion extends AnimalImpl {
 
     @Override
-    public List<Food> eats() {
+    public List<Eatable> eats() {
         return create(appetiteFor("Human").and("Gorilla").and("Chimp").and("Lion"));
     }
 

@@ -7,11 +7,7 @@ import com.agfa.demo.domain.PlantKingdom.Vegetable;
 
 public class KingdomFactory {
 
-    public static Kingdom createLife(String type){
-        return createAnimal(type);
-    }
-
-    public static AnimalInterface createAnimal(String type){
+    public static Animal createAnimal(String type){
         switch(type) {
             case "Human":
                 return new Human();

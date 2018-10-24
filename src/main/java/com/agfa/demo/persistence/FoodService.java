@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -15,15 +15,15 @@ public class FoodService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void insert(FoodEntity foodEntity){
+    public void insert(FoodEntity foodEntity) {
         entityManager.persist(foodEntity);
         personalQuery();
     }
 
-    public void personalQuery(){
-        Query query = entityManager.createQuery("select animal from AnimalEntity animal where animal.name = :name").setParameter("name", "Wout");
+    public void personalQuery() {
+        TypedQuery<AnimalEntity> query = entityManager.createQuery("select animal from AnimalEntity animal where animal.name = :name", AnimalEntity.class).setParameter("name", "Wout");
         List<AnimalEntity> animal = query.getResultList();
-        animal.stream().forEach(System.out::println);
+        animal.forEach(System.out::println);
     }
 
     public FoodEntity getFood(String type) {

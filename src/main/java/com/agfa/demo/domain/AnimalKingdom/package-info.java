@@ -1,1 +1,0 @@
-package com.agfa.demo.domain.AnimalKingdom;

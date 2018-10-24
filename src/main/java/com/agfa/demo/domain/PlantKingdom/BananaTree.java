@@ -1,6 +1,6 @@
 package com.agfa.demo.domain.PlantKingdom;
 
-import com.agfa.demo.domain.Food;
+import com.agfa.demo.domain.Kingdom;
 import com.agfa.demo.domain.KingdomFactory;
 import com.agfa.demo.persistence.PlantEntity;
 import com.agfa.demo.persistence.PlantService;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import java.util.stream.Stream;
 
 @Component
 public class BananaTree extends Plant {
@@ -17,15 +17,23 @@ public class BananaTree extends Plant {
     @Resource
     private PlantService plantService;
 
+    private boolean isGrown;
+
     @Override
-    public void grow() {
-        plantService.updateIfEmpty(this);
-        plantService.insert(new Banana());
+    public void grow(int amount) {
+        if(!isGrown) {
+            plantService.updateIfEmpty(this);
+            isGrown = true;
+        }
+        Stream.generate(() -> new Banana(name))
+            .limit(amount).forEach(plantService::insert);
     }
 
     @Override
-    public Vegetable weedSeed() {
-        return new BananaTree();
+    public Vegetable weedSeed(String seed) {
+        name = seed;
+        plantService.updateIfEmpty(this);
+        return this;
     }
 
     @Override
@@ -33,16 +41,12 @@ public class BananaTree extends Plant {
         return type.equals(type());
     }
 
-    public List<Vegetable> getTree(){
-        return plantService.getAll().stream().map(BananaTree::adapt).collect(Collectors.toList());
+    @Override
+    public List<Kingdom> getTree(){
+        return plantService.getAll().stream().map(BananaTree::mapToVegetable).collect(Collectors.toList());
     }
 
-    private static Vegetable adapt(PlantEntity plantEntity) {
-        try {
-            return KingdomFactory.createVegetable(plantEntity.getType());
-        } catch (NullPointerException exception) {
-            System.out.println("Plant not found. Creating new banana");
-            return new Banana();
-        }
+    private static Kingdom mapToVegetable(PlantEntity plantEntity) {
+        return KingdomFactory.createVegetable(plantEntity.getType()).giveName(plantEntity.getName());
     }
 }

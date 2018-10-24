@@ -1,46 +1,38 @@
 package com.agfa.demo.domain.PlantKingdom;
 
-import com.agfa.demo.domain.Food;
-import org.springframework.stereotype.Component;
+import com.agfa.demo.domain.Kingdom;
 
-@Component
-public class Banana extends Food implements Vegetable {
+public class Banana extends Fruit {
+
+    private String parent;
 
     public Banana(){
-        type = "Banana";
-        calories = 100;
+        parent = "BananaTree";
+    }
+
+    public Banana(String parent){
+        this.parent = parent;
     }
 
     @Override
     public int getIntake() {
-        return calories;
+        return 100;
     }
 
     @Override
-    public void grow() {
-        calories += 10;
+    public void grow(int amount) {}
+
+    @Override
+    public String parent() {
+        return parent;
     }
 
     @Override
-    public Vegetable weedSeed() {
+    public Kingdom giveName(String name) {
+        parent = name;
         return this;
     }
 
     @Override
-    public String parent() {
-        return "BananaTree";
-    }
-
-    @Override
-    public boolean isPlant() {
-        return false;
-    }
-
-    @Override
-    public boolean is(String type) {
-        return type.equals(type());
-    }
-
-    @Override
-    public String printLine() {return "The " + type() + " is hanging on the " + parent();}
+    public String printString() {return "The " + type() + " is hanging on " + parent;}
 }

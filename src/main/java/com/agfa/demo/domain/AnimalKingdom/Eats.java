@@ -1,18 +1,17 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
-import com.agfa.demo.domain.Food;
+import com.agfa.demo.domain.Eatable;
 import com.agfa.demo.domain.PlantKingdom.Banana;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Eats {
-    private List<Food> foodList;
+    private List<Eatable> eatableList;
     private EatChain chain;
 
     public Eats(){
-        foodList = new ArrayList<>();
+        eatableList = new ArrayList<>();
         chain = new EatChain();
     }
 
@@ -21,46 +20,38 @@ public class Eats {
         return chain;
     }
 
-    public List<Food> getFood(){
-        return foodList;
-    }
-
-    public void setFood(List<Food> foods) {
-        foodList = foods;
-    }
-
-    protected class EatChain {
+    public class EatChain {
         public EatChain and(String food){
             createFactory(food);
             return this;
         }
 
-        public List<Food> build() {
-            List<Food> foods = foodList;
-            foodList = new ArrayList<>();
-            return foods;
+        public List<Eatable> build() {
+            List<Eatable> eatables = eatableList;
+            eatableList = new ArrayList<>();
+            return eatables;
         }
     }
 
     private void createFactory(String food){
         switch(food) {
             case "Human":
-                foodList.add(new Human());
+                eatableList.add(new Human());
                 break;
             case "Chimp":
-                foodList.add(new Chimp());
+                eatableList.add(new Chimp());
                 break;
             case "Gorilla":
-                foodList.add(new Gorilla());
+                eatableList.add(new Gorilla());
                 break;
             case "Lion":
-                foodList.add(new Lion());
+                eatableList.add(new Lion());
                 break;
             case "Banana":
-                foodList.add(new Banana());
+                eatableList.add(new Banana());
                 break;
             default:
-                foodList.add(new Human());
+                eatableList.add(new Human());
                 break;
         }
     }
