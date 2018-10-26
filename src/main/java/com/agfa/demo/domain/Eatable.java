@@ -5,4 +5,6 @@ public interface Eatable extends Kingdom{
     int getIntake();
 
     boolean isAnimal();
+
+    void addAsFood();
 }

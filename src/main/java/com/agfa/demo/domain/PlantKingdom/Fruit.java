@@ -1,8 +1,11 @@
 package com.agfa.demo.domain.PlantKingdom;
 
+import com.agfa.demo.domain.AnimalKingdom.Eats;
 import com.agfa.demo.domain.Eatable;
 
 public abstract class Fruit implements Vegetable, Eatable {
+
+    private Eats foods;
 
     @Override
     public boolean isAnimal() {
@@ -28,5 +31,15 @@ public abstract class Fruit implements Vegetable, Eatable {
     @Override
     public String name(){
         return type();
+    }
+
+    @Override
+    public void addAsFood() {
+        foods = new Eats();
+        try {
+            foods.addAsFood(type(), getClass().newInstance());
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -44,6 +44,11 @@ public class AnimalImplTest extends AnimalImpl {
     @Test
     public void eatsInitTest(){
         AnimalImpl chimp = new Chimp();
-        Assert.assertTrue(chimp.eats().get(0).is("Banana"));
+        Assert.assertTrue(chimp.getFood().get(0).is("Banana"));
+    }
+
+    @Override
+    public void addAsFood() {
+
     }
 }

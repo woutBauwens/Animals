@@ -1,9 +1,5 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
-import com.agfa.demo.domain.Eatable;
-
-import java.util.List;
-
 public abstract class Primate extends AnimalImpl {
 
     @Override
@@ -12,7 +8,7 @@ public abstract class Primate extends AnimalImpl {
     }
 
     @Override
-    public List<Eatable> eats() {
-        return create(appetiteFor("Banana"));
+    public Eats.EatChain eats() {
+        return super.eats().eat("Banana");
     }
 }

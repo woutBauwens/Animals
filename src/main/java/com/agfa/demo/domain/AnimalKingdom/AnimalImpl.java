@@ -1,10 +1,10 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
 import com.agfa.demo.domain.Eatable;
-import com.agfa.demo.domain.Kingdom;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public abstract class AnimalImpl implements Animal, Eatable {
@@ -34,6 +34,7 @@ public abstract class AnimalImpl implements Animal, Eatable {
 
     @Override
     public String name(){
+        addAsFood();
         return name;
     }
 
@@ -47,14 +48,18 @@ public abstract class AnimalImpl implements Animal, Eatable {
         return true;
     }
 
+    Eats.EatChain eats(){
+        return foods.start();
+    }
+
     @Override
-    public List<Eatable> eats(){
-        return foods.eat("Banana").build();
+    public List<Eatable> getFood() {
+        return eats().build();
     }
 
     @Override
     public String printString(){
-        return name + " eats " + eats().stream().map(Eatable::type).collect(Collectors.joining("s, ", "", "s"))  + "";
+        return name + " eats " + getFood().stream().map(Eatable::type).collect(Collectors.joining("s, ", "", "s"))  + "";
     }
 
     @Override
@@ -70,11 +75,16 @@ public abstract class AnimalImpl implements Animal, Eatable {
         return Objects.hash(name);
     }
 
-    Eats.EatChain appetiteFor(String type){
-        return foods.eat(type);
+    void addAsFood(Supplier<Eatable> newEatable) {
+        foods.addAsFood(type(), newEatable);
     }
 
-    List<Eatable> create(Eats.EatChain appetite){
-        return appetite.build();
+    @Override
+    public void addAsFood() {
+        try {
+            foods.addAsFood(type(), getClass().newInstance());
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }

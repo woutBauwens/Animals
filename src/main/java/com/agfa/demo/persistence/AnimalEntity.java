@@ -22,7 +22,7 @@ public class AnimalEntity extends LivingEntity {
     AnimalEntity(Animal animal) {
         this.name = animal.name();
         this.type = animal.type();
-        this.eats = animal.eats().stream().map(FoodEntity::new).collect(Collectors.toList());
+        this.eats = animal.getFood().stream().map(FoodEntity::new).collect(Collectors.toList());
         parent = type;
     }
 

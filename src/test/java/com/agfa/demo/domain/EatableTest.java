@@ -27,7 +27,7 @@ public class EatableTest {
 
     @Test
     public void eatsTest(){
-        List<Eatable> eatableList = eats.eat("Banana").and("Human").and("Lion").build();
+        List<Eatable> eatableList = eats.start().eat("Banana").eat("Human").eat("Lion").build();
         assertEquals("Banana", eatableList.get(0).type());
         assertEquals("Human", eatableList.get(1).type());
         assertEquals("Lion", eatableList.get(2).type());

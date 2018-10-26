@@ -10,8 +10,14 @@ public class Banana extends Fruit {
         parent = "BananaTree";
     }
 
-    public Banana(String parent){
+    Banana(String parent){
+        addAsFood();
         this.parent = parent;
+    }
+
+    public Banana(boolean adding){
+        if(adding)
+            addAsFood();
     }
 
     @Override

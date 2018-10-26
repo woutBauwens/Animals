@@ -11,5 +11,5 @@ public interface Animal extends Kingdom {
     String name();
     Animal giveName(String name);
 
-    List<Eatable> eats();
+    List<Eatable> getFood();
 }

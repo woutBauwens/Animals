@@ -1,27 +1,30 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
 import com.agfa.demo.domain.Eatable;
-import com.agfa.demo.domain.PlantKingdom.Banana;
+import com.agfa.demo.domain.FoodMapSingleton;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 
+@Component
 public class Eats {
     private List<Eatable> eatableList;
     private EatChain chain;
+    private Map<String, Eatable> supplierMap;
 
     public Eats(){
         eatableList = new ArrayList<>();
         chain = new EatChain();
+        supplierMap = new TreeMap<>();
     }
 
-    public EatChain eat(String food){
-        createFactory(food);
+    public EatChain start(){
         return chain;
     }
 
     public class EatChain {
-        public EatChain and(String food){
+        public EatChain eat(String food){
             createFactory(food);
             return this;
         }
@@ -33,8 +36,20 @@ public class Eats {
         }
     }
 
+    public void addAsFood(String typeName, Supplier<Eatable> newObject){
+        FoodMapSingleton.add(typeName, newObject.get());
+    }
+
+    public void addAsFood(String typeName, Eatable eatable){
+        FoodMapSingleton.add(typeName, eatable);
+    }
+
     private void createFactory(String food){
-        switch(food) {
+        Optional<Eatable> eatable = FoodMapSingleton.get(food);
+        if(eatable.isPresent()){
+        Eatable foodSupplier = eatable.get();
+        eatableList.add(foodSupplier);}
+ /*       switch(food) {
             case "Human":
                 eatableList.add(new Human());
                 break;
@@ -53,6 +68,6 @@ public class Eats {
             default:
                 eatableList.add(new Human());
                 break;
-        }
+        }*/
     }
 }

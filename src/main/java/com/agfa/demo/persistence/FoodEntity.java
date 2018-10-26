@@ -22,4 +22,8 @@ public class FoodEntity {
         this.calories = eatable.getIntake();
         this.type = eatable.type();
     }
+
+    String getType() {
+        return type;
+    }
 }
