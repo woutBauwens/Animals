@@ -2,7 +2,9 @@ package com.agfa.demo.persistence;
 
 import com.agfa.demo.domain.PlantKingdom.Vegetable;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 
 @Entity
 @DiscriminatorValue(value = "Vegetable")

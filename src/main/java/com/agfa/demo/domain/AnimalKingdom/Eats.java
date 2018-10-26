@@ -1,7 +1,7 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
 import com.agfa.demo.domain.Eatable;
-import com.agfa.demo.domain.FoodMapSingleton;
+import com.agfa.demo.domain.KingdomManager;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -37,15 +37,15 @@ public class Eats {
     }
 
     public void addAsFood(String typeName, Supplier<Eatable> newObject){
-        FoodMapSingleton.add(typeName, newObject.get());
+        KingdomManager.add(typeName, newObject.get());
     }
 
     public void addAsFood(String typeName, Eatable eatable){
-        FoodMapSingleton.add(typeName, eatable);
+        KingdomManager.add(typeName, eatable);
     }
 
     private void createFactory(String food){
-        Optional<Eatable> eatable = FoodMapSingleton.get(food);
+        Optional<Eatable> eatable = KingdomManager.asFood(food);
         if(eatable.isPresent()){
         Eatable foodSupplier = eatable.get();
         eatableList.add(foodSupplier);}

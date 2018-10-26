@@ -15,11 +15,6 @@ public class Banana extends Fruit {
         this.parent = parent;
     }
 
-    public Banana(boolean adding){
-        if(adding)
-            addAsFood();
-    }
-
     @Override
     public int getIntake() {
         return 100;

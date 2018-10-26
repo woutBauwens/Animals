@@ -11,8 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
-
 @RunWith(MockitoJUnitRunner.class)
 public class AnimalImplTest extends AnimalImpl {
 
@@ -32,7 +30,7 @@ public class AnimalImplTest extends AnimalImpl {
     @Test
     public void makeNewAnimalTest(){
         animalRepository.makeAnimal("Wout", new Human());
-       // assertEquals("Wout eats Bananas, Chimps", animalRepository.getAllAnimals().get(0).printString());
+       // assertEquals("Wout eats Bananas, Chimps", animalRepository.getAllAnimals().asFood(0).printString());
     }
 
     @Test

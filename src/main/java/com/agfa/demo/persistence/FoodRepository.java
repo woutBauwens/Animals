@@ -1,7 +1,7 @@
 package com.agfa.demo.persistence;
 
 import com.agfa.demo.domain.Eatable;
-import com.agfa.demo.domain.FoodMapSingleton;
+import com.agfa.demo.domain.KingdomManager;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -13,7 +13,7 @@ public class FoodRepository {
     private FoodService foodService;
 
     public void initFoods(){
-        FoodMapSingleton.getAllTypesOfFood().stream().map(FoodEntity::new).forEach(foodService::insert);
+        KingdomManager.getAllTypesOfFood().stream().map(FoodEntity::new).forEach(foodService::insert);
     }
 
     public void save(FoodEntity foodEntity){

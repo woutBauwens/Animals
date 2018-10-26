@@ -1,7 +1,6 @@
 package com.agfa.demo.persistence;
 
 import com.agfa.demo.domain.AnimalKingdom.Animal;
-import com.agfa.demo.domain.Kingdom;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

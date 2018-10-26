@@ -1,6 +1,5 @@
 package com.agfa.demo.domain.PlantKingdom;
 
-import com.agfa.demo.domain.Kingdom;
 import com.agfa.demo.persistence.PlantService;
 import org.junit.Before;
 import org.junit.Rule;

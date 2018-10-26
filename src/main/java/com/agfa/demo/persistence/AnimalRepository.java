@@ -1,8 +1,8 @@
 package com.agfa.demo.persistence;
 
 import com.agfa.demo.domain.AnimalKingdom.*;
+import com.agfa.demo.domain.KingdomManager;
 import com.agfa.demo.domain.Kingdom;
-import com.agfa.demo.domain.KingdomFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -16,7 +16,7 @@ public class AnimalRepository {
     private AnimalService animalService;
 
     private void makeAnimal(String name, String type){
-        makeAnimal(name, KingdomFactory.createAnimal(type));
+        makeAnimal(name, KingdomManager.asAnimal(type).get());
     }
 
     public void makeAnimal(String name,

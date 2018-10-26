@@ -1,13 +1,14 @@
 package com.agfa.demo.domain.PlantKingdom;
 
+import com.agfa.demo.domain.KingdomManager;
 import com.agfa.demo.domain.Kingdom;
-import com.agfa.demo.domain.KingdomFactory;
 import com.agfa.demo.persistence.PlantEntity;
 import com.agfa.demo.persistence.PlantService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,6 +48,11 @@ public class BananaTree extends Plant {
     }
 
     private static Kingdom mapToVegetable(PlantEntity plantEntity) {
-        return KingdomFactory.createVegetable(plantEntity.getType()).giveName(plantEntity.getName());
+        Optional<Vegetable> plant = KingdomManager.asVegetable(plantEntity.getType());
+        if(plant.isPresent())
+            return plant.get().giveName(plantEntity.getName());
+        else {
+            return new BananaTree().giveName(plantEntity.getName());
+        }
     }
 }

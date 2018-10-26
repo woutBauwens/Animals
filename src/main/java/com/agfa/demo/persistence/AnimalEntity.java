@@ -1,8 +1,8 @@
 package com.agfa.demo.persistence;
 
 import com.agfa.demo.domain.AnimalKingdom.Animal;
+import com.agfa.demo.domain.KingdomManager;
 import com.agfa.demo.domain.Kingdom;
-import com.agfa.demo.domain.KingdomFactory;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,6 +27,6 @@ public class AnimalEntity extends LivingEntity {
     }
 
     Kingdom mapToAnimal() {
-        return KingdomFactory.createAnimal(type).giveName(name);
+        return KingdomManager.asAnimal(type).get().giveName(name);
     }
 }

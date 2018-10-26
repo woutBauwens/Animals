@@ -4,7 +4,6 @@ import com.agfa.demo.domain.Eatable;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public abstract class AnimalImpl implements Animal, Eatable {
@@ -73,10 +72,6 @@ public abstract class AnimalImpl implements Animal, Eatable {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
-
-    void addAsFood(Supplier<Eatable> newEatable) {
-        foods.addAsFood(type(), newEatable);
     }
 
     @Override
