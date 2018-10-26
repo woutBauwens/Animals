@@ -1,6 +1,7 @@
 package com.agfa.demo.domain.AnimalKingdom;
 
 import com.agfa.demo.domain.Eatable;
+import com.agfa.demo.domain.Kingdom;
 import com.agfa.demo.domain.KingdomManager;
 import org.springframework.stereotype.Component;
 
@@ -36,8 +37,8 @@ public class Eats {
         }
     }
 
-    public void addAsFood(String typeName, Supplier<Eatable> newObject){
-        KingdomManager.add(typeName, newObject.get());
+    public void addAsFood(String typeName, Supplier<Kingdom> newObject){
+        KingdomManager.add(typeName, newObject);
     }
 
     public void addAsFood(String typeName, Eatable eatable){
